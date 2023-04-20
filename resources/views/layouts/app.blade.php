@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md" style="background-color: #1B488B;">
+        <nav class="navbar navbar-expand-md fixed-top" style="background-color: #1B488B;">
             <div class="container-fluid">
                 <a class="navbar-brand ml-auto" href="{{ url('/') }}">
                     <img src="assets/logo.png" alt="CleanWash" height="64px">
@@ -34,9 +34,13 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @auth
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item"><a href="/request" class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white">Appointment Request</a></li>
+                        <div class="vr"></div>
+                        <li class="nav-item"><a href="/appointments" class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white">My Appointment</a></li>
                     </ul>
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     
@@ -58,9 +62,10 @@
                                 </li>
                             @endif
                         @else
+                        
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-uppercase gap-10 fw-bold fs-4 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    Welcome, {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
