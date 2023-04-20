@@ -22,7 +22,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md fixed-top" style="background-color: #1B488B;">
+        <nav class="navbar navbar-expand-md" style="background-color: #1B488B;">
             <div class="container-fluid">
                 <a class="navbar-brand ml-auto" href="{{ url('/') }}">
                     <img src="assets/logo.png" alt="CleanWash" height="64px">
