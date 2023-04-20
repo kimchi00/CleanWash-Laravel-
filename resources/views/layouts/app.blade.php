@@ -48,13 +48,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
+                                <div class="vr"></div>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white" href="{{ route('register') }}">{{ __('signup') }}</a>
                                 </li>
                             @endif
                         @else
