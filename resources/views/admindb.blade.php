@@ -75,29 +75,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>John Doe</td>
-					<td>May 10, 2023</td>
-					<td>2:00 PM</td>
-					<td>Haircut</td>
-					<td>Confirmed</td>
-				</tr>
-				<tr>
-					<td>Jane Smith</td>
-					<td>May 12, 2023</td>
-					<td>11:00 AM</td>
-					<td>Manicure</td>
-					<td>Pending</td>
-				</tr>
-				<tr>
-					<td>Magic johnson</td>
-					<td>May 15, 2023</td>
-					<td>3:30 PM</td>
-					<td>Massage</td>
-					<td>Cancelled</td>
-				</tr>
-			</tbody>
+    @foreach ($appointments as $appointment)
+    <tr>
+        <td>{{ $appointment->name }}</td>
+        <td>{{ $appointment->date->format('M d, Y') }}</td>
+        <td>{{ $appointment->time->format('g:i A') }}</td>
+        <td>{{ $appointment->service }}</td>
+        <td>{{ $appointment->status }}</td>
+    </tr>
+    @endforeach
+</tbody>
 		</table>
 	</div>
 </body>
-</html>
