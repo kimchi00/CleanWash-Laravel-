@@ -90,7 +90,7 @@
 					<td>Pending</td>
 				</tr>
 				<tr>
-					<td>Mark Johnson</td>
+					<td>Magic johnson</td>
 					<td>May 15, 2023</td>
 					<td>3:30 PM</td>
 					<td>Massage</td>
