@@ -52,11 +52,18 @@
 
                         <div class="form-group row text-left">
                             <div class="col-md-8 offset-md-2">
-                                <select id="date" name="date" class="form-control">
-                                    <option value="2023-05-06">May 6, 2023</option>
-                                    <option value="2023-05-07">May 7, 2023</option>
-                                    <option value="2023-05-08">May 8, 2023</option>
+                                <select class="form-select" name="service_type" id="service_type">
+                                    <option value="interior_only">Interior Only</option>
+                                    <option value="exterior_only">Exterior Only</option>
+                                    <option value="full_service">Full Service</option>
                                 </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row text-left">
+                            <div class="col-md-8 offset-md-2">
+                                <input type="datetime-local" name="datetime" id="datetime" class="form-control" style="padding: 10px; margin: 10px 0px 10px 0px;">
                             </div>
                         </div>
 
