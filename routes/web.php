@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppointmentController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,8 @@ Route::get('/requestform', function () {
     return view('requestform');
 })->name('requestform');
 
-Route::get('/admindb', function () {
-    return view('admindb');
-})->name('admindb');
+Route::get('/admindb', [AppointmentController::class, 'index'])->name('admin.dashboard');
+// Remove this route since it is not being used
+// Route::get('/admindb', function () {
+//     return view('admindb');
+// })->name('admindb');

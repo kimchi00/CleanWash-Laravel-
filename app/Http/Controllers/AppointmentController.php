@@ -8,9 +8,19 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Appointment;
 
-class Controller extends BaseController
+class AppointmentController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function index()
+    {
+        $appointments = Appointment::all();
+        return view('admindb', compact('appointments'));
+    }
 }
+
+
+
+
 
 
