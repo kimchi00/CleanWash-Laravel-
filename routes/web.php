@@ -21,3 +21,10 @@ Route::get('/creation', function () {
     return view('creation');
 })->name('creation');
 
+Route::get('/requestform', function () {
+    return view('requestform');
+})->name('requestform');
+
+Route::get('/admindb', function () {
+    return view('admindb');
+})->name('admindb');

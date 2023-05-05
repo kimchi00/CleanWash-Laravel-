@@ -9,11 +9,14 @@
                 "Our online appointment booking platform offers a convenient way for busy car owners to schedule car
                 wash services anytime and anywhere without the hassle of physically visiting a car wash facility."
             </p>
-            <a href="{{ route('creation') }}" class="btn custom-btn text-white px-4 py-2 text-uppercase">Get Started</a>
-            <a href="{{ route('creation') }}" class="btn"><img src="assets/arrow.png" alt=""> </a>
+            @auth
+                <a href="{{ route('requestform') }}" class="btn custom-btn text-white px-4 py-2 text-uppercase">Get Started</a>
+                <a href="{{ route('requestform') }}" class="btn"><img src="assets/arrow.png" alt=""> </a>
+            @else
+                <a href="{{ route('creation') }}" class="btn custom-btn text-white px-4 py-2 text-uppercase">Get Started</a>
+                <a href="{{ route('creation') }}" class="btn"><img src="assets/arrow.png" alt=""> </a>
+            @endauth
         </div>
     </div>
 </div>
-
-
 @endsection
