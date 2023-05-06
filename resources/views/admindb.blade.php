@@ -20,8 +20,18 @@
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  overflow-y: scroll;
   max-height: 400px; /* adjust as needed */
+  overflow-y: scroll;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 td {
@@ -30,52 +40,40 @@ td {
   text-align: center;
 }
 
-
-table th {
+table td {
   padding: 10px;
-  background-color: #333;
-  color: #fff;
   border: 1px solid #000;
-  font-size: 18px;
-  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+.tdesign {
+  background-color: transparent !important;
+  font-family: "Concert One", cursive !important;
+  color: #1F87E8 !important;
+  font-weight: 900 !important;
+  text-align: center !important;
+  border: none !important;
+  padding: 10px 10px !important;
   text-transform: uppercase;
 }
 
-        table td {
-            padding: 10px;
-            border: 1px solid #000;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        table tr:hover {
-            background-color: #ddd;
-        }
-
-        .tdesign {
-    background-color: transparent !important;
-    font-family: "Concert One", cursive !important;
-    color: #1F87E8 !important;
-    font-weight: 900 !important;
-    text-align: center !important;
-    border: none !important;
-    padding: 10px 10px !important;
-    text-transform: uppercase;
-}
-        .buff {
+.buff {
   padding: 0px 0px 0px 5px!important;
   max-height: 400px;
-  overflow: auto;
   margin: 0 auto!important;
   text-align: center; /* added to center the table */
 }
 
 .buff2 {
-  
   padding: 40px 0px 0px 5px!important;
   max-width: 400px!important;
   margin: 0 auto!important;
