@@ -17,41 +17,43 @@
                     </div>
                     <div class="card-body">
                         @if($appointments->isNotEmpty())
+                            @php
+                                $latestAppointment = $appointments->last();
+                            @endphp
                             <div>
-                                <strong>Name:</strong> {{ $appointments->last()->name }}
+                                <strong>Name:</strong> {{ $latestAppointment->name }}
                             </div>
                             <div>
-                                <strong>Email:</strong> {{ $appointments->last()->email }}
+                                <strong>Email:</strong> {{ $latestAppointment->email }}
                             </div>
                             <div>
-                                <strong>Contact Number:</strong> {{ $appointments->last()->contact_number }}
+                                <strong>Contact Number:</strong> {{ $latestAppointment->contact_number }}
                             </div>
                             <div>
-                                <strong>Service Type:</strong> {{ $appointments->last()->service_type }}
+                                <strong>Service Type:</strong> {{ $latestAppointment->service_type }}
                             </div>
                             <div>
-                                <strong>Date and Time:</strong> {{ $appointments->last()->datetime }}
+                                <strong>Date and Time:</strong> {{ $latestAppointment->datetime }}
                             </div>
                             <div>
-                                <strong>Status: 
-                                    <span style="color: 
-                                        @if($appointments->last()->status == 'Pending') 
-                                            #CC7722
-                                        @elseif($appointments->last()->status == 'On-going') 
-                                            green
-                                        @elseif($appointments->last()->status == 'Cancelled') 
-                                            red
-                                        @elseif($appointments->last()->status == 'Completed') 
-                                            blue
-                                        @endif
-                                        ">
-                                        {{ $appointments->last()->status }}
-                                    </span>
-                                </strong>
+                                <strong>Status:</strong>
+                                <span style="color: 
+                                    @if($latestAppointment->status == 'Pending') 
+                                        #CC7722
+                                    @elseif($latestAppointment->status == 'On-going') 
+                                        green
+                                    @elseif($latestAppointment->status == 'Cancelled') 
+                                        red
+                                    @elseif($latestAppointment->status == 'Completed') 
+                                        blue
+                                    @endif
+                                ">
+                                    {{ $latestAppointment->status }}
+                                </span>
                             </div>
                             <hr>
                             <a href="{{ route('admindb') }}" style="text-decoration: none; color: inherit;">
-                                <strong> {{ __('Show Appointment History') }} </strong>
+                                <strong>{{ __('Show Appointment History') }}</strong>
                             </a>
                         @else
                             <p>No appointments found.</p>
@@ -90,5 +92,4 @@ form {
     margin: 0 auto!important;
     margin-top: 20px!important;
 }
-
 </style>

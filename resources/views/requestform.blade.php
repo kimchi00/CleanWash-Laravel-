@@ -123,9 +123,4 @@ form {
   margin: 0 auto!important;
   margin-top: 20px!important;
 }
-
-
-
-
 </style>
-

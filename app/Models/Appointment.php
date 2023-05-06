@@ -15,5 +15,9 @@ class Appointment extends Model
         'service_type',
         'datetime',
     ];
-    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

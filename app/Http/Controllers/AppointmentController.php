@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends BaseController
 {
@@ -15,7 +16,8 @@ class AppointmentController extends BaseController
 
     public function index()
     {
-        $appointments = Appointment::all();
+        $user = Auth::user();
+        $appointments = $user->appointments;
 
         return view('appointments.index', compact('appointments'));
     }
@@ -29,34 +31,27 @@ class AppointmentController extends BaseController
             'service_type' => 'required',
             'datetime' => 'required|date',
         ]);
-    
-        Appointment::create($validatedData);
-    
-        
-    
+
+        $user = Auth::user();
+        $user->appointments()->create($validatedData);
+
         return redirect()->back()->with('success', 'Appointment request submitted successfully.');
     }
 
     public function viewAppointments()
     {
-        $appointments = Appointment::all();
-        
-        return view('viewAppointments',  compact('appointments'));
+        $user = Auth::user();
+        $appointments = $user->appointments;
+
+        return view('viewAppointments', compact('appointments'));
     }
 
-    
+
     public function show($id)
     {
-        $appointment = Appointment::findOrFail($id);
+        $user = Auth::user();
+        $appointment = $user->appointments()->findOrFail($id);
 
         return view('viewAppointments', compact('appointment'));
     }
-
-
 }
-
-
-
-
-
-
