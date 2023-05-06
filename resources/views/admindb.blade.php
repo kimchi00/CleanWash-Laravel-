@@ -20,6 +20,8 @@
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: scroll;
+  max-height: 400px; /* adjust as needed */
 }
 
 td {
@@ -84,40 +86,39 @@ table th {
 
 @section('content')
 <div class="buff2 col-md-8 offset-md-10">
-<img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
+    <img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
     <div class= "tdesign mb-2">
-    <h1>Appointment Overview</h1>
-    <hr style="border-top: 5px solid #000080">
+        <h1>Appointment Overview</h1>
+        <hr style="border-top: 5px solid #000080">
     </div>
 </div>
-    
-    <div class="buff col-md-8 offset-md-10">
-        <table>
-            <thead>
+
+<div class="buff col-md-8 offset-md-10">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Service Type</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+                @forelse ($appointments as $appointment)
                 <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Contact Number</th>
-                    <th>Service Type</th>
-                    <th>Date and Time</th>
+                    <td>{{ $appointment->name }}</td>
+                    <td>{{ $appointment->email }}</td>
+                    <td>{{ $appointment->contact_number }}</td>
+                    <td>{{ $appointment->service_type }}</td>
+                    <td>{{ $appointment->datetime }}</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach ($appointments as $appointment)
-                    <tr>
-                        <td>{{ $appointment->name }}</td>
-                        <td>{{ $appointment->email }}</td>
-                        <td>{{ $appointment->contact_number }}</td>
-                        <td>{{ $appointment->service_type }}</td>
-                        <td>{{ $appointment->datetime }}</td>
-                    </tr>
-                @endforeach
-                @empty
-                    <tr>
-                        <td colspan="5">No appointments found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+            @empty
+                <tr>
+                    <td colspan="5">No appointments found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection
