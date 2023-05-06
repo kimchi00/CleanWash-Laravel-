@@ -38,7 +38,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a href="/requestform" class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white">Appointment Request</a></li>
                         <div class="vr"></div>
-                        <li class="nav-item"><a href="/admindb" class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white">My Appointment</a></li>
+                        <li class="nav-item"><a href="{{ route('viewAppointments') }}" class="nav-link text-uppercase gap-10 fw-bold fs-4 text-white">My Appointment</a></li>
                     </ul>
                     @endauth
 

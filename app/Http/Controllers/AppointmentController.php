@@ -16,7 +16,8 @@ class AppointmentController extends BaseController
     public function index()
     {
         $appointments = Appointment::all();
-    return view('admindb', ['appointments' => $appointments]);
+
+        return view('appointments.index', compact('appointments'));
     }
 
     public function store(Request $request)
@@ -31,10 +32,27 @@ class AppointmentController extends BaseController
     
         Appointment::create($validatedData);
     
-        // Add any additional logic or redirect response as per your application's requirements
+        
     
         return redirect()->back()->with('success', 'Appointment request submitted successfully.');
     }
+
+    public function viewAppointments()
+    {
+        $appointments = Appointment::all();
+        
+        return view('viewAppointments',  compact('appointments'));
+    }
+
+    
+    public function show($id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        return view('viewAppointments', compact('appointment'));
+    }
+
+
 }
 
 

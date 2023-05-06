@@ -128,13 +128,21 @@ text-decoration: none;
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{ $name }}</td>
-                    <td>{{ $email }}</td>
-                    <td>{{ $contact_number }}</td>
-                    <td>{{ $service_type }}</td>
-                    <td>{{ $datetime }}</td>
-                </tr>
+                @forelse ($appointmentHistory->sortByDesc('datetime') as $appointment)
+                    <tr>
+                        <td>
+                            {{ $appointment->name }}
+                        </td>
+                        <td>{{ $appointment->email }}</td>
+                        <td>{{ $appointment->contact_number }}</td>
+                        <td>{{ $appointment->service_type }}</td>
+                        <td>{{ $appointment->datetime }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">No appointments found.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
