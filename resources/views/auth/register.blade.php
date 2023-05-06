@@ -87,7 +87,6 @@ body {
     height: auto !important;
 }
 .buff {
-  
   padding: 90px 0px 0px 5px!important;
   max-width: 400px!important;
   margin: 0 auto!important;

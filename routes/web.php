@@ -53,3 +53,40 @@ Route::get('/admindb', function () {
 
     return view('admindb', ['appointmentHistory' => $appointmentHistory]);
 })->name('admindb');
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/creation', function () {
+    return view('creation');
+})->name('creation');
+
+Route::get('/requestform', function () {
+    return view('requestform');
+})->name('requestform');
+
+Route::get('/admindb', [AppointmentController::class, 'index'])->name('admin.dashboard');
+// Remove this route since it is not being used
+// Route::get('/admindb', function () {
+//     return view('admindb');
+// })->name('admindb');
+
+Route::get('/users', 'App\Http\Controllers\AppointmentController@index');
+Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
+
+
+Route::get('/view-appointments', [AppointmentController::class, 'viewAppointments'])->name('viewAppointments');
+
+Route::view('/admindb', 'admindb')->name('admindb');
+
+Route::get('/admindb', [AppointmentController::class, 'index'])->name('admindb');
+
+Route::get('/appointments/{id}', 'AppointmentController@show')->name('view.appointments');
+
+Route::get('/appointments', 'AppointmentController@index')->name('appointments.index');
+
+Route::get('/admindb', function () {
+    
+    $appointmentHistory = App\Models\Appointment::all(); 
+
+    return view('admindb', ['appointmentHistory' => $appointmentHistory]);
+})->name('admindb');
