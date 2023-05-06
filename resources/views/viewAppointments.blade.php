@@ -32,6 +32,23 @@
                             <div>
                                 <strong>Date and Time:</strong> {{ $appointments->last()->datetime }}
                             </div>
+                            <div>
+                                <strong>Status: 
+                                    <span style="color: 
+                                        @if($appointments->last()->status == 'Pending') 
+                                            #CC7722
+                                        @elseif($appointments->last()->status == 'On-going') 
+                                            green
+                                        @elseif($appointments->last()->status == 'Cancelled') 
+                                            red
+                                        @elseif($appointments->last()->status == 'Completed') 
+                                            blue
+                                        @endif
+                                        ">
+                                        {{ $appointments->last()->status }}
+                                    </span>
+                                </strong>
+                            </div>
                             <hr>
                             <a href="{{ route('admindb') }}" style="text-decoration: none; color: inherit;">
                                 <strong> {{ __('Show Appointment History') }} </strong>

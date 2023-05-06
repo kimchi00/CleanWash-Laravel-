@@ -20,6 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('contact_number');
             $table->string('service_type');
             $table->timestamp('datetime');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }
