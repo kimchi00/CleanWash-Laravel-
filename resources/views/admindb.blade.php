@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,31 +113,29 @@ text-decoration: none;
     }
 	</style>
 </head>
-<body>
-<h1>Appointment Overview</h1>
-	<div class="container">
-	
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Service</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($appointments as $appointment)
+
+@section('content')
+    <h1>Appointment Overview</h1>
+    <div class="container">
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $appointment->name }}</td>
-                    <td>{{ $appointment->date->format('M d, Y') }}</td>
-                    <td>{{ $appointment->time->format('g:i A') }}</td>
-                    <td>{{ $appointment->service }}</td>
-                    <td>{{ $appointment->status }}</td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Service Type</th>
+                    <th>Date and Time</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
-	</div>
-</body>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ $name }}</td>
+                    <td>{{ $email }}</td>
+                    <td>{{ $contact_number }}</td>
+                    <td>{{ $service_type }}</td>
+                    <td>{{ $datetime }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+@endsection

@@ -13,7 +13,8 @@
                 </div>
                
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('appointments.store') }}">
+                        
                         @csrf
                         <div class="form-group row text-left">
                             <div class="col-md-8 offset-md-2">
@@ -63,7 +64,12 @@
 
                         <div class="form-group row text-left">
                             <div class="col-md-8 offset-md-2">
-                                <input type="datetime-local" name="datetime" id="datetime" class="form-control" style="padding: 10px; margin: 10px 0px 10px 0px;">
+                                <input type="datetime-local" name="datetime" id="datetime" class="form-control @error('datetime') is-invalid @enderror" style="padding: 10px; margin: 10px 0px 10px 0px;" required>
+                                @error('datetime')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

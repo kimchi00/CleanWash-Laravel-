@@ -32,3 +32,6 @@ Route::get('/admindb', [AppointmentController::class, 'index'])->name('admin.das
 // Route::get('/admindb', function () {
 //     return view('admindb');
 // })->name('admindb');
+
+Route::get('/users', 'App\Http\Controllers\AppointmentController@index');
+Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');

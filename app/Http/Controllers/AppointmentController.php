@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,6 +17,23 @@ class AppointmentController extends BaseController
     {
         $appointments = Appointment::all();
         return view('admindb', compact('appointments'));
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'contact_number' => 'required',
+            'service_type' => 'required',
+            'datetime' => 'required|date',
+        ]);
+    
+        Appointment::create($validatedData);
+    
+        // Add any additional logic or redirect response as per your application's requirements
+    
+        return redirect()->back()->with('success', 'Appointment request submitted successfully.');
     }
 }
 
