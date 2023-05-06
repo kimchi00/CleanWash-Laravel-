@@ -16,7 +16,7 @@ class AppointmentController extends BaseController
     public function index()
     {
         $appointments = Appointment::all();
-        return view('admindb', compact('appointments'));
+    return view('admindb', ['appointments' => $appointments]);
     }
 
     public function store(Request $request)
