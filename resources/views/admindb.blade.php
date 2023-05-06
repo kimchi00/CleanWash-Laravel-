@@ -112,6 +112,11 @@ table th {
                         <td>{{ $appointment->datetime }}</td>
                     </tr>
                 @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5">No appointments found.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
