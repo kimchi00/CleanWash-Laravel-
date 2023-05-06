@@ -9,59 +9,83 @@
                 <img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
                 <div class="card-header mb-2">
                     {{ __('MY APPOINTMENT') }}
-                    <hr style="border-top: 5px solid #5F85B2">
+                    <hr style="border-top: 5px solid #000080">
                 </div>
                 <div class="card">
-                    <div class="card-header">
-                        APPOINTMENT TRACKER
+    <div class="card-header">
+        <h3 class="card-title">{{ __('Latest Appointment') }}</h3>
+    </div>
+    <div class="card-body text-center">
+        @if($appointments->isNotEmpty())
+            @php
+                $latestAppointment = $appointments->last();
+            @endphp
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="name">{{ __('Name') }}</label>
+                        </div>
+                        <p class="form-control-plaintext">{{ $latestAppointment->name }}</p>
                     </div>
-                    <div class="card-body">
-                        @if($appointments->isNotEmpty())
-                            @php
-                                $latestAppointment = $appointments->last();
-                            @endphp
-                            <div>
-                                <strong>Name:</strong> {{ $latestAppointment->name }}
-                            </div>
-                            <div>
-                                <strong>Email:</strong> {{ $latestAppointment->email }}
-                            </div>
-                            <div>
-                                <strong>Contact Number:</strong> {{ $latestAppointment->contact_number }}
-                            </div>
-                            <div>
-                                <strong>Service Type:</strong> {{ $latestAppointment->service_type }}
-                            </div>
-                            <div>
-                                <strong>Date and Time:</strong> {{ $latestAppointment->datetime }}
-                            </div>
-                            <div>
-                                <strong>Status:</strong>
-                                <span style="color: 
-                                    @if($latestAppointment->status == 'Pending') 
-                                        #CC7722
-                                    @elseif($latestAppointment->status == 'On-going') 
-                                        green
-                                    @elseif($latestAppointment->status == 'Cancelled') 
-                                        red
-                                    @elseif($latestAppointment->status == 'Completed') 
-                                        blue
-                                    @endif
-                                ">
-                                    {{ $latestAppointment->status }}
-                                </span>
-                            </div>
-                            <hr>
-                            <a href="{{ route('admindb') }}" style="text-decoration: none; color: inherit;">
-                                <strong>{{ __('Show Appointment History') }}</strong>
-                            </a>
-                        @else
-                            <p>No appointments found.</p>
-                        @endif
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="email">{{ __('Email') }}</label>
+                        </div>
+                        <p class="form-control-plaintext">{{ $latestAppointment->email }}</p>
+                    </div>
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="contact_number">{{ __('Contact Number') }}</label>
+                        </div>
+                        <p class="form-control-plaintext">{{ $latestAppointment->contact_number }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="service_type">{{ __('Service Type') }}</label>
+                        </div>
+                        <div class="appointment-info">
+                        <p class="form-control-plaintext">{{ $latestAppointment->service_type }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="datetime">{{ __('Date and Time') }}</label>
+                        </div>
+                        <p class="form-control-plaintext">{{ $latestAppointment->datetime }}</p>
+                    </div>
+                    <div class="form-group">
+                    <div class="appointment-label">
+                        <label for="status">{{ __('Status') }}</label>
+                        </div>
+                        <p>
+                            <span class="
+                                @if($latestAppointment->status == 'Pending') 
+                                    badge badge-warning
+                                @elseif($latestAppointment->status == 'On-going') 
+                                    badge badge-success
+                                @elseif($latestAppointment->status == 'Cancelled') 
+                                    badge badge-danger
+                                @elseif($latestAppointment->status == 'Completed') 
+                                    badge badge-primary
+                                @endif
+                            ">
+                                {{ $latestAppointment->status }}
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
-        </div>
+            <hr>
+            <a href="{{ route('admindb') }}" class="btn btn-info">
+                <i class="fa fa-history"></i>
+                {{ __('Show Appointment History') }}
+            </a>
+        @else
+            <p>{{ __('No appointments found.') }}</p>
+        @endif
     </div>
 </div>
 
@@ -87,9 +111,45 @@ form {
 }
   
 .buff {
-    padding: 90px 0px 0px 5px!important;
+    padding: 30 0px 0px 5px!important;
     max-width: 400px!important;
     margin: 0 auto!important;
-    margin-top: 20px!important;
+}
+.appointment-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(6, auto);
+    grid-gap: 10px;
+}
+
+.appointment-label {
+    font-weight: bold;
+    color:#00008B;
+    text-transform: uppercase;
+}
+
+.appointment-info {
+    color: #B2BEB5;
+    text-transform: uppercase;
+}
+.appointment-status {
+    font-weight: bold;
+}
+
+.appointment-history-link {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .appointment-history-link:hover {
+        background-color: #0056b3;
+        color: #fff;
+        transform: scale(1.1);
+    }
+    .buff2 {
+  padding: 0px 0px 0px 5px!important;
+  max-width: 200px!important;
 }
 </style>
