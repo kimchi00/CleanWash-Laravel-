@@ -85,40 +85,43 @@ table th {
 </head>
 
 @section('content')
+    
 <div class="buff2 col-md-8 offset-md-10">
-    <img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
-    <div class= "tdesign mb-2">
-        <h1>Appointment Overview</h1>
-        <hr style="border-top: 5px solid #000080">
+        <img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
+        <div class= "tdesign mb-2">
+            <h1>Appointment <br> Overview</h1>
+            <hr style="border-top: 5px solid #000080">
+        </div>
     </div>
-</div>
-
-<div class="buff col-md-8 offset-md-10">
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact Number</th>
-                <th>Service Type</th>
-                <th>Date and Time</th>
-            </tr>
-        </thead>
-        <tbody>
-                @forelse ($appointments as $appointment)
+    <div class="buff col-md-8 offset-md-10">
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $appointment->name }}</td>
-                    <td>{{ $appointment->email }}</td>
-                    <td>{{ $appointment->contact_number }}</td>
-                    <td>{{ $appointment->service_type }}</td>
-                    <td>{{ $appointment->datetime }}</td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Service Type</th>
+                    <th>Date and Time</th>
                 </tr>
-            @empty
-                <tr>
-                    <td colspan="5">No appointments found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @forelse ($appointmentHistory->sortByDesc('datetime') as $appointment)
+                    <tr>
+                        <td>
+                            {{ $appointment->name }}
+                        </td>
+                        <td>{{ $appointment->email }}</td>
+                        <td>{{ $appointment->contact_number }}</td>
+                        <td>{{ $appointment->service_type }}</td>
+                        <td>{{ $appointment->datetime }}</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5">No appointments found.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    </div>
 @endsection
