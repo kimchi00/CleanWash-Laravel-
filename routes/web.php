@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\WelcomeController;
-
+use App\Models\Appointment;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +15,6 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -28,26 +26,15 @@ Route::get('/requestform', function () {
     return view('requestform');
 })->name('requestform');
 
+Route::get('/admindb', [AppointmentController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/users', 'App\Http\Controllers\AppointmentController@index');
 Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
-
-
 Route::get('/view-appointments', [AppointmentController::class, 'viewAppointments'])->name('viewAppointments');
-
-Route::view('/admindb', 'admindb')->name('admindb');
-
-Route::get('/admindb', [AppointmentController::class, 'index'])->name('admindb');
-
 Route::get('/appointments/{id}', 'AppointmentController@show')->name('view.appointments');
-
 Route::get('/appointments', 'AppointmentController@index')->name('appointments.index');
 
 Route::get('/admindb', function () {
-    
     $appointmentHistory = App\Models\Appointment::all(); 
-
     return view('admindb', ['appointmentHistory' => $appointmentHistory]);
-})->name('admindb');
-
-
+})->name('admin.dashboard');

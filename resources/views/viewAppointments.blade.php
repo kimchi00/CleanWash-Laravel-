@@ -79,7 +79,7 @@
                 </div>
             </div>
             <hr>
-            <a href="{{ route('admindb') }}" class="btn btn-info">
+            <a href="{{ route('admin.dashboard') }}" class="btn btn-info">
                 <i class="fa fa-history"></i>
                 {{ __('Show Appointment History') }}
             </a>

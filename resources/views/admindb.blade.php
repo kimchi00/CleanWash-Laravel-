@@ -95,32 +95,35 @@ table tbody tr:hover {
             </tr>
         </thead>
         <tbody>
-            @forelse ($appointmentHistory->where('user_id', auth()->user()->id)->sortByDesc('datetime') as $appointment)
-                <tr>
-                    <td>{{ $appointment->name }}</td>
-                    <td>{{ $appointment->email }}</td>
-                    <td>{{ $appointment->contact_number }}</td>
-                    <td>{{ $appointment->service_type }}</td>
-                    <td>{{ $appointment->datetime }}</td>
-                    <td style="
-                              @if($appointment->status == 'Pending') 
-                                  color: #CC7722;
-                              @elseif($appointment->status == 'On-going') 
-                                  color: green;
-                              @elseif($appointment->status == 'Cancelled') 
-                                  color: red;
-                              @elseif($appointment->status == 'Completed') 
-                                  color: blue;
-                              @endif
-                              font-weight: bold;
-                          ">{{ $appointment->status }}</td>
+        @forelse ($appointmentHistory->sortByDesc('datetime') as $appointment)
+                  @if (auth()->user()->is_admin || $appointment->user_id === auth()->user()->id)
+                          <tr>
+                              <td>{{ $appointment->name }}</td>
+                              <td>{{ $appointment->email }}</td>
+                              <td>{{ $appointment->contact_number }}</td>
+                              <td>{{ $appointment->service_type }}</td>
+                              <td>{{ $appointment->datetime }}</td>
+                              <td style="
+                                  @if($appointment->status == 'Pending') 
+                                      color: #CC7722;
+                                  @elseif($appointment->status == 'On-going') 
+                                      color: green;
+                                  @elseif($appointment->status == 'Cancelled') 
+                                      color: red;
+                                  @elseif($appointment->status == 'Completed') 
+                                      color: blue;
+                                  @endif
+                                  font-weight: bold;
+                              ">{{ $appointment->status }}</td>
+                          </tr>
+                      @endif
+                  @empty
+                      <tr>
+                          <td colspan="5">No appointments found.</td>
+                      </tr>
+          @endforelse
 
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5">No appointments found.</td>
-                </tr>
-            @endforelse
+
         </tbody>
     </table>
 </div>

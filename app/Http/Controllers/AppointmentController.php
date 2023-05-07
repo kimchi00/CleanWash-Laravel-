@@ -19,7 +19,7 @@ class AppointmentController extends BaseController
         $user = Auth::user();
         $appointments = $user->appointments;
 
-        return view('appointments.index', compact('appointments'));
+        return view('admindb', compact('appointments'));
     }
 
     public function store(Request $request)
@@ -54,4 +54,6 @@ class AppointmentController extends BaseController
 
         return view('viewAppointments', compact('appointment'));
     }
+
+    
 }
