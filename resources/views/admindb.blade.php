@@ -77,7 +77,6 @@ table tbody tr:hover {
 </head>
 
 
-
 @section('content')
 
 <div class="buff2 col-md-8 offset-md-10">
@@ -106,44 +105,66 @@ table tbody tr:hover {
             </tr>
         </thead>
         <tbody>
-              @forelse ($appointmentHistory->sortByDesc('datetime') as $appointment)
-                  @if (auth()->user()->is_admin || $appointment->user_id === auth()->user()->id)
-                      <tr>
-                          <td>{{ $appointment->name }}</td>
-                          <td>{{ $appointment->email }}</td>
-                          <td>{{ $appointment->contact_number }}</td>
-                          <td>{{ $appointment->service_type }}</td>
-                          <td>{{ $appointment->datetime }}</td>
-                          <td style="
-                              @if($appointment->status == 'Pending') 
-                                  color: #CC7722;
-                              @elseif($appointment->status == 'On-going') 
-                                  color: green;
-                              @elseif($appointment->status == 'Cancelled') 
-                                  color: red;
-                              @elseif($appointment->status == 'Completed') 
-                                  color: blue;
-                              @endif
-                              font-weight: bold;
-                          ">{{ $appointment->status }}</td>
-                          @auth
-                        @if (auth()->user()->is_admin)
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn btn-primary">Accept</button>
-                                    <button class="btn btn-danger">Deny</button>
-                                </div>
-                            </td>
-                        @endif
-                    @endauth
-                      </tr>
-                  @endif
-              @empty
-                  <tr>
-                      <td colspan="6">No appointments found.</td>
-                  </tr>
-              @endforelse
-          </tbody>
+            @forelse ($appointmentHistory->sortByDesc('datetime') as $appointment)
+                @if (auth()->user()->is_admin || $appointment->user_id === auth()->user()->id)
+                    <tr>
+                        <td>{{ $appointment->name }}</td>
+                        <td>{{ $appointment->email }}</td>
+                        <td>{{ $appointment->contact_number }}</td>
+                        <td>{{ $appointment->service_type }}</td>
+                        <td>{{ $appointment->datetime }}</td>
+                        <td style="
+                            @if($appointment->status == 'Pending') 
+                                color: #CC7722;
+                            @elseif($appointment->status == 'On-going') 
+                                color: green;
+                            @elseif($appointment->status == 'Cancelled') 
+                                color: red;
+                            @elseif($appointment->status == 'Completed') 
+                                color: blue;
+                            @endif
+                            font-weight: bold;
+                        ">{{ $appointment->status }}</td>
+                        @auth
+                            @if (auth()->user()->is_admin)
+                                <td class="action-buttons">
+                                @if($appointment->status == 'Pending')
+                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="On-going">
+                                        <button type="submit" class="btn btn-primary">Accept</button>
+                                    </form>
+
+                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="Cancelled">
+                                        <button type="submit" class="btn btn-danger">Deny</button>
+                                    </form>
+                                @elseif($appointment->status == 'On-going')
+                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="hidden" name="status" value="Completed">
+                                        <button type="submit" class="btn btn-primary">Mark as Complete</button>
+                                    </form>
+                                @elseif($appointment->status == 'Completed')
+                                    Done!
+                                @elseif($appointment->status == 'Cancelled')
+                                    Denied   
+                                @endif
+                                </td>
+                            @endif
+                        @endauth
+                    </tr>
+                @endif
+            @empty
+                <tr>
+                    <td colspan="6">No appointments found.</td>
+                </tr>
+            @endforelse
+        </tbody>
     </table>
 </div>
 

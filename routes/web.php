@@ -39,3 +39,6 @@ Route::get('/admindb', function () {
     $appointmentHistory = App\Models\Appointment::all(); 
     return view('admindb', ['appointmentHistory' => $appointmentHistory]);
 })->name('admin.dashboard');
+
+Route::put('appointments/{id}/update-status', 'AppointmentController@updateStatus')->name('appointments.updateStatus');
+

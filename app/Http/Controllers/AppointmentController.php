@@ -10,6 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 
+
 class AppointmentController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -54,6 +55,21 @@ class AppointmentController extends BaseController
 
         return view('viewAppointments', compact('appointment'));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $status = $request->input('status');
+
+        $appointment->status = $status;
+        $appointment->save();
+
+        // You can perform additional actions or redirect the user to a specific page
+
+        return redirect()->back()->with('success', 'Appointment status updated successfully.');
+    }
+
+
 
     
 }
