@@ -108,7 +108,7 @@ table tbody tr:hover {
                         <td>{{ $appointment->email }}</td>
                         <td>{{ $appointment->contact_number }}</td>
                         <td>{{ $appointment->service_type }}</td>
-                        <td>{{ $appointment->datetime }}</td>
+                        <td>{{ \Carbon\Carbon::parse($appointment->datetime)->format('m/d/Y h:i A') }}</td>
                         <td style="
                             @if($appointment->status == 'Pending') 
                                 color: #CC7722;

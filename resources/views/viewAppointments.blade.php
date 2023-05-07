@@ -16,76 +16,78 @@
         <h3 class="card-title">{{ __('Latest Appointment') }}</h3>
     </div>
     <div class="card-body text-center">
-        @if($appointments->isNotEmpty())
-            @php
-                $latestAppointment = $appointments->last();
-            @endphp
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="name">{{ __('Name') }}</label>
+                @if($appointments->isNotEmpty())
+                @php
+                    $latestAppointment = $appointments->last();
+                    $formattedDatetime = \Carbon\Carbon::parse($latestAppointment->datetime)->format('m/d/Y h:i A');
+                @endphp
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="name">{{ __('Name') }}</label>
+                            </div>
+                            <p class="form-control-plaintext">{{ $latestAppointment->name }}</p>
                         </div>
-                        <p class="form-control-plaintext">{{ $latestAppointment->name }}</p>
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="email">{{ __('Email') }}</label>
+                            </div>
+                            <p class="form-control-plaintext">{{ $latestAppointment->email }}</p>
+                        </div>
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="contact_number">{{ __('Contact Number') }}</label>
+                            </div>
+                            <p class="form-control-plaintext">{{ $latestAppointment->contact_number }}</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="email">{{ __('Email') }}</label>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="service_type">{{ __('Service Type') }}</label>
+                            </div>
+                            <div class="appointment-info">
+                                <p class="form-control-plaintext">{{ $latestAppointment->service_type }}</p>
+                            </div>
                         </div>
-                        <p class="form-control-plaintext">{{ $latestAppointment->email }}</p>
-                    </div>
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="contact_number">{{ __('Contact Number') }}</label>
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="datetime">{{ __('Date and Time') }}</label>
+                            </div>
+                            <p class="form-control-plaintext">{{ $formattedDatetime }}</p>
                         </div>
-                        <p class="form-control-plaintext">{{ $latestAppointment->contact_number }}</p>
+                        <div class="form-group">
+                            <div class="appointment-label">
+                                <label for="status">{{ __('Status') }}</label>
+                            </div>
+                            <p>
+                                <strong><span style="color: 
+                                    @if($appointments->last()->status == 'Pending') 
+                                        #CC7722
+                                    @elseif($appointments->last()->status == 'On-going') 
+                                        green
+                                    @elseif($appointments->last()->status == 'Cancelled') 
+                                        red
+                                    @elseif($appointments->last()->status == 'Completed') 
+                                        blue
+                                    @endif
+                                ">
+                                    {{ $latestAppointment->status }}
+                                </strong></span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="service_type">{{ __('Service Type') }}</label>
-                        </div>
-                        <div class="appointment-info">
-                        <p class="form-control-plaintext">{{ $latestAppointment->service_type }}</p>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="datetime">{{ __('Date and Time') }}</label>
-                        </div>
-                        <p class="form-control-plaintext">{{ $latestAppointment->datetime }}</p>
-                    </div>
-                    <div class="form-group">
-                    <div class="appointment-label">
-                        <label for="status">{{ __('Status') }}</label>
-                        </div>
-                        <p>
-                            <strong><span style="color: 
-                                        @if($appointments->last()->status == 'Pending') 
-                                            #CC7722
-                                        @elseif($appointments->last()->status == 'On-going') 
-                                            green
-                                        @elseif($appointments->last()->status == 'Cancelled') 
-                                            red
-                                        @elseif($appointments->last()->status == 'Completed') 
-                                            blue
-                                        @endif
-                                        ">
-                                {{ $latestAppointment->status }}
-                            </strong></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <a href="{{ route('admin.dashboard') }}" class="btn btn-info">
-                <i class="fa fa-history"></i>
-                {{ __('Show Appointment History') }}
-            </a>
-        @else
-            <p>{{ __('No appointments found.') }}</p>
-        @endif
+                <hr>
+                <a href="{{ route('admin.dashboard') }}" class="btn btn-info">
+                    <i class="fa fa-history"></i>
+                    {{ __('Show Appointment History') }}
+                </a>
+            @else
+                <p>{{ __('No appointments found.') }}</p>
+            @endif
+
     </div>
 </div>
 
