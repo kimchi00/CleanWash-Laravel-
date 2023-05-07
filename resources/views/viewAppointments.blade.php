@@ -61,19 +61,19 @@
                         <label for="status">{{ __('Status') }}</label>
                         </div>
                         <p>
-                            <span class="
-                                @if($latestAppointment->status == 'Pending') 
-                                    badge badge-warning
-                                @elseif($latestAppointment->status == 'On-going') 
-                                    badge badge-success
-                                @elseif($latestAppointment->status == 'Cancelled') 
-                                    badge badge-danger
-                                @elseif($latestAppointment->status == 'Completed') 
-                                    badge badge-primary
-                                @endif
-                            ">
+                            <strong><span style="color: 
+                                        @if($appointments->last()->status == 'Pending') 
+                                            #CC7722
+                                        @elseif($appointments->last()->status == 'On-going') 
+                                            green
+                                        @elseif($appointments->last()->status == 'Cancelled') 
+                                            red
+                                        @elseif($appointments->last()->status == 'Completed') 
+                                            blue
+                                        @endif
+                                        ">
                                 {{ $latestAppointment->status }}
-                            </span>
+                            </strong></span>
                         </p>
                     </div>
                 </div>

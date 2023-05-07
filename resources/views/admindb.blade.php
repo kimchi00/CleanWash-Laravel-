@@ -91,6 +91,7 @@ table tbody tr:hover {
                 <th>Contact Number</th>
                 <th>Service Type</th>
                 <th>Date and Time</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -101,6 +102,19 @@ table tbody tr:hover {
                     <td>{{ $appointment->contact_number }}</td>
                     <td>{{ $appointment->service_type }}</td>
                     <td>{{ $appointment->datetime }}</td>
+                    <td style="
+                              @if($appointment->status == 'Pending') 
+                                  color: #CC7722;
+                              @elseif($appointment->status == 'On-going') 
+                                  color: green;
+                              @elseif($appointment->status == 'Cancelled') 
+                                  color: red;
+                              @elseif($appointment->status == 'Completed') 
+                                  color: blue;
+                              @endif
+                              font-weight: bold;
+                          ">{{ $appointment->status }}</td>
+
                 </tr>
             @empty
                 <tr>
