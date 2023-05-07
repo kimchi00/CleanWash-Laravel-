@@ -19,8 +19,6 @@
   border: 2px solid #000;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  max-height: 400px; /* adjust as needed */
-  overflow-y: scroll;
 }
 thead {
   position: sticky;
@@ -59,17 +57,18 @@ table tbody tr:hover {
 }
 .buff {
   padding: 0px 0px 0px 0px!important;
-  max-height: 400px;
   margin: 0 auto!important;
   text-align: center; /* added to center the table */
-}
+  max-height: 350px; /* adjust as needed */
+  overflow-y: scroll;
+  overflow-x: hidden; 
+} 
 .buff2 {
   padding: 40px 0px 0px 25px!important;
   max-width: 400px!important;
   margin: 0 auto!important;
 }
 .action-buttons {
-        display: flex;
         gap: 10px;
 }
 	</style>
@@ -128,19 +127,23 @@ table tbody tr:hover {
                             @if (auth()->user()->is_admin)
                                 <td class="action-buttons">
                                 @if($appointment->status == 'Pending')
+                                <div class="row">
+                                <div class="col-md-6">
                                     <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="On-going">
-                                        <button type="submit" class="btn btn-primary">Accept</button>
+                                        <button type="submit" class=" btn btn-primary">Accept</button>
                                     </form>
-
+                                    </div>
+                                    <div class="col-md-6">
                                     <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
                                         @csrf
                                         @method('PUT')
                                         <input type="hidden" name="status" value="Cancelled">
                                         <button type="submit" class="btn btn-danger">Deny</button>
                                     </form>
+                                    </div>
                                 @elseif($appointment->status == 'On-going')
                                     <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
                                         @csrf
