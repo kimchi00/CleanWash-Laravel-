@@ -21,13 +21,12 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 thead {
-  position: sticky;
-  top: 0;
   background-color: #333;
   color: #fff;
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
+ 
 }
 td {
   padding: 10px;
@@ -56,7 +55,6 @@ table tbody tr:hover {
   text-transform: uppercase;
 }
 .buff {
-  padding: 0px 0px 0px 0px!important;
   margin: 0 auto!important;
   text-align: center; /* added to center the table */
   max-height: 350px; /* adjust as needed */

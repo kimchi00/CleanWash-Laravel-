@@ -18,7 +18,7 @@ Route::get('/requestform', function () {
 
 Route::get('/admindb', [AppointmentController::class, 'index'])
     ->name('admin.dashboard')
-    ->middleware('auth');
+    ->middleware('auth', 'admin','isAdmin');
 
 Route::get('/users', 'App\Http\Controllers\AppointmentController@index');
 Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
@@ -27,11 +27,11 @@ Route::get('/appointments/{id}', 'AppointmentController@show')->name('view.appoi
 Route::get('/appointments', 'AppointmentController@index')->name('appointments.index');
 
 Route::get('/admindb', function () {
-    if (!auth()->user()->isAdmin()) {
+    if (auth()->check() && auth()->user()->isAdmin()) {
         return redirect()->route('home');
     }
 
-    $appointmentHistory = Appointment::all(); 
+    $appointmentHistory = App\Models\Appointment::all(); 
     return view('admindb', ['appointmentHistory' => $appointmentHistory]);
 })->name('admin.dashboard');
 
