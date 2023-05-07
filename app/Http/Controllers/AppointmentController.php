@@ -64,12 +64,19 @@ class AppointmentController extends BaseController
         $appointment->status = $status;
         $appointment->save();
 
-        // You can perform additional actions or redirect the user to a specific page
+        
 
         return redirect()->back()->with('success', 'Appointment status updated successfully.');
     }
 
+    
+    public function delete(Request $request, $id)
+    {
+        $appointment = Appointment::findOrFail($id);
+        $appointment->delete();
 
+        return redirect()->back()->with('success', 'Appointment status updated successfully.');
 
+    }
     
 }

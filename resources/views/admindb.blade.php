@@ -124,36 +124,45 @@ table tbody tr:hover {
                         @auth
                             @if (auth()->user()->is_admin)
                                 <td class="action-buttons">
-                                @if($appointment->status == 'Pending')
-                                <div class="row">
-                                <div class="col-md-6">
-                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="status" value="On-going">
-                                        <button type="submit" class=" btn btn-primary">Accept</button>
-                                    </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="status" value="Cancelled">
-                                        <button type="submit" class="btn btn-danger">Deny</button>
-                                    </form>
-                                    </div>
-                                @elseif($appointment->status == 'On-going')
-                                    <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
-                                        @csrf
-                                        @method('PUT')
-                                        <input type="hidden" name="status" value="Completed">
-                                        <button type="submit" class="btn btn-primary">Mark as Complete</button>
-                                    </form>
-                                @elseif($appointment->status == 'Completed')
-                                    Done!
-                                @elseif($appointment->status == 'Cancelled')
-                                    Denied   
-                                @endif
+                                    @if($appointment->status == 'Pending')
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="status" value="On-going">
+                                                    <button type="submit" class="btn btn-primary">Accept</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="status" value="Cancelled">
+                                                    <button type="submit" class="btn btn-danger">Deny</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @elseif($appointment->status == 'On-going')
+                                        <form method="POST" action="{{ route('appointments.updateStatus', $appointment->id) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="status" value="Completed">
+                                            <button type="submit" class="btn btn-primary">Mark as Complete</button>
+                                        </form>
+                                    @elseif($appointment->status == 'Completed')
+                                        <form method="POST" action="{{ route('appointments.delete', $appointment->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    @elseif($appointment->status == 'Cancelled')
+                                        <form method="POST" action="{{ route('appointments.delete', $appointment->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    @endif
                                 </td>
                             @endif
                         @endauth

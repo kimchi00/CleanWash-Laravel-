@@ -42,3 +42,5 @@ Route::get('/admindb', function () {
 
 Route::put('appointments/{id}/update-status', 'AppointmentController@updateStatus')->name('appointments.updateStatus');
 
+Route::delete('/appointments/{id}', 'AppointmentController@delete')->name('appointments.delete');
+
