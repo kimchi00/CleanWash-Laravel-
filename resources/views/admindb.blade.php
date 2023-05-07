@@ -32,7 +32,6 @@ thead {
   text-transform: uppercase;
 }
 td {
-  width: 20%;
   padding: 10px;
   text-align: center;
 }
@@ -59,13 +58,13 @@ table tbody tr:hover {
   text-transform: uppercase;
 }
 .buff {
-  padding: 0px 0px 0px 5px!important;
+  padding: 0px 0px 0px 0px!important;
   max-height: 400px;
   margin: 0 auto!important;
   text-align: center; /* added to center the table */
 }
 .buff2 {
-  padding: 40px 0px 0px 5px!important;
+  padding: 40px 0px 0px 25px!important;
   max-width: 400px!important;
   margin: 0 auto!important;
 }
