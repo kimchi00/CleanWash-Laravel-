@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\WelcomeController;
 
 
 /*
@@ -27,13 +28,6 @@ Route::get('/requestform', function () {
     return view('requestform');
 })->name('requestform');
 
-Route::get('/admindb', function () {
-    if (Auth::check() && Auth::user()->isAdmin()) {
-        return view('welcome');
-    }
-    
-    return redirect()->route('home');
-})->name('admin.dashboard');
 
 Route::get('/users', 'App\Http\Controllers\AppointmentController@index');
 Route::post('/appointments', 'AppointmentController@store')->name('appointments.store');
@@ -55,13 +49,5 @@ Route::get('/admindb', function () {
 
     return view('admindb', ['appointmentHistory' => $appointmentHistory]);
 })->name('admindb');
-Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/creation', function () {
-    return view('creation');
-})->name('creation');
 
-Route::get('/requestform', function () {
-    return view('requestform');
-})->name('requestform');
