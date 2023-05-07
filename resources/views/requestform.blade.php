@@ -9,7 +9,7 @@
                 <img src="{{ asset('assets/car2.png') }}" alt="Car Image" width="70" height="70" style="display:block; margin:auto;">
                 <div class="card-header mb-2">   
                     {{ __('APPOINTMENT REQUEST FORM') }}
-                    <hr style="border-top: 5px solid #5F85B2">
+                    <hr style="border-top: 5px solid #000080">
                 </div>
                
                 <div class="card-body">
@@ -118,9 +118,8 @@ form {
   
 .buff {
   
-  padding: 90px 0px 0px 5px!important;
+  padding: 20px 0px 0px 5px!important;
   max-width: 400px!important;
   margin: 0 auto!important;
-  margin-top: 20px!important;
 }
 </style>
